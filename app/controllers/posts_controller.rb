@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :move_to_index, except: :index
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
@@ -69,6 +70,10 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:text)
+      params.require(:post).permit(:text, user_id)
+    end
+
+    def move_to_index
+      redirect_to action: :index unless user_signed_in?
     end
 end
