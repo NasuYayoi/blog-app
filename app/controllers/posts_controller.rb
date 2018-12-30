@@ -6,6 +6,11 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+
+    # 検索オブジェクト
+    @search = Post.ransack(params[:q])
+    # 検索結果
+    @posts = @search.result
   end
 
   # GET /posts/1

@@ -15,6 +15,15 @@
   </div>
 </nav>
 
+<%= search_form_for @search do |f| %>
+  <div class="row">
+  <!-- 検索フォーム。textカラムに対して部分一致検索ができる -->
+    <%= f.search_field :text_cont, placeholder: "キーワードを入力", class: "col s3" %>
+  <!-- 検索ボタン -->
+    <div class="actions col small material-icons"><%= f.submit "search"%></div>
+  </div>
+<% end %>
+
 <% @posts.each do |post| %>
   <%= render "post", post: post %>
 <% end %>
