@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.order("created_at DESC").page(params[:page]).per(5)
 
     # 検索オブジェクト
     @search = Post.ransack(params[:q])
