@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col s8 offset-s2">
+    <div class="card amber lighten-5">
+      <div class="card-content flow-text">
+        <p><%= simple_format(post.text) %></p>
+      </div>
+      <div class="card-action">
+        <%= link_to 'Show', post, class: "waves-effect waves-light btn lime" %>
+
+        <% if user_signed_in? && current_user.id == post.user_id %>
+          <%= link_to 'Edit', edit_post_path(post), class: "waves-effect waves-light btn lime" %>
+          <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "waves-effect waves-light btn lime" %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<nav class="amber darken-2">
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">Blog</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <% if user_signed_in? %>
+        <li><%= link_to 'LogOut', destroy_user_session_path, method: :delete %></li>
+        <li><%= link_to 'New', new_post_path %></li>
+      <% else %>
+        <li><%= link_to 'LogIn', new_user_session_path %></li>
+        <li><%= link_to 'SignUp',new_user_registration_path %></li>
+      <% end %>
+</ul>
+  </div>
+</nav>
+
+<%= search_form_for @search do |f| %>
+  <div class="row">
+  <!-- 検索フォーム。textカラムに対して部分一致検索ができる -->
+    <%= f.search_field :text_cont, placeholder: "キーワードを入力", class: "col s3" %>
+  <!-- 検索ボタン -->
+    <div class="actions col small material-icons"><%= f.submit "search"%></div>
+  </div>
+<% end %>
+
+<% @posts.each do |post| %>
+  <%= render "post", post: post %>
+<% end %>
+
+
+
