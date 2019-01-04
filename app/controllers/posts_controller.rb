@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     # 検索オブジェクト
     @search = Post.ransack(params[:q])
     # 検索結果
-    @posts = @search.result
+    @posts = @search.result.order("created_at DESC").page(params[:page]).per(5)
   end
 
   # GET /posts/1
@@ -75,7 +75,7 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:text, user_id)
+      params.require(:post).permit(:text).merge(user_id: current_user.id)
     end
 
     def move_to_index
